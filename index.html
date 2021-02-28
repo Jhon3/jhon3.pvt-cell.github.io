@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Font Awesome-->
+    <script src="https://kit.fontawesome.com/6b8f117541.js" crossorigin="anonymous"></script>
+
+    <!-- Estili Customizado -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <title>Célula PVT - Cálculo</title>
+</head>
+
+
+<body>
+    <header>
+        <!-- Inicio cabecalho-->
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #335C67;">
+            <div class="container">
+                <a href="#" class="navbar-brand">
+                    <h3 style="color: aliceblue;"><strong>Célula PVT</strong></h3>
+                    <!--<img src="img/logonew.png" width="150" height="auto">-->
+                </a>
+
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-main">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="nav-main">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" id="pi" class="btn btn-outline-light" onclick="select('#pi')">PI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" id="vi" class="btn btn-outline-light" onclick="select('#vi')">VI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" id="ti" class="btn btn-outline-light" onclick="select('#ti')">TI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" id="pf" class="btn btn-outline-light" onclick="select('#pf')">PF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" id="vf" class="btn btn-outline-light" onclick="select('#vf')">VF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" id="tf" class="btn btn-outline-light" onclick="select('#tf')">TF</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Fim cabecalho-->
+    </header>
+
+    <!-- Inicio da seção-->
+    <section id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 d-flex">
+                    <div class="align-self-center">
+                        <form class="mt-4 mb-4">
+                            <div class="input-group input-group-sm">
+                                <input type="text" placeholder="Insira VI" id="camp1" class="form-control">
+                                <input type="text" placeholder="Insira TI" id="camp2" class="form-control">
+                                <input type="text" placeholder="Insira PF" id="camp3" class="form-control">
+                                <input type="text" placeholder="Insira VF" id="camp4" class="form-control">
+                                <input type="text" placeholder="Insira TF" id="camp5" class="form-control">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-warning" id="calcular"
+                                        onclick="execute()">Calcular</button>
+                                    <button type="button" class="btn btn-danger" id="limpar"
+                                        onclick="clearFields()">Limpar</button>
+                                </div>
+                        </form>
+                    </div>
+                    <div id="resultDiv" class="hidden">
+                        <h4>Resultado: <strong id="result"></strong></h4>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 d-none d-md-block align-self-center">
+                    <!--<h3>Resultado: 12.3</h3>-->
+                    <!--<img src="img/fire.jpg" width="70%" height="auto">-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--
+    <section>
+        <div class="container">
+            <canvas id="pvtChart"></canvas>
+        </div>
+    </section>
+-->
+    <footer class="md-4 mb-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <p>
+                        Desenvolvido por Jhonattan Cabral
+                        <a href="https://github.com/Jhon3" class="btn btn-sm btn-outline-dark" title="GitHub">
+                            <i class="fab fa-github fa"></i>
+                        </a>
+                    </p>
+                </div>
+                <!--
+                <div class="col-md-4 d-flex justify-content-end">
+                    <a href="#" class="text-secondary" title="Informação">
+                        <i class="fas fa-info"></i>
+                    </a>
+                </div>
+            -->
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <p id="copy"></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Fim da seção-->
+
+    <script type="text/javascript">
+        let buttons = ["#pi", "#vi", "#ti", "#pf", "#vf", "#tf"]
+/*
+        var ctx = document.getElementById("pvtChart");
+        var data = {
+            labels: [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+            datasets: [{
+                label: "PI",
+                function: function (pi, vi, ti, pf, vf, tf) { return (((pf * vf) / tf) * ti) / vi },
+                borderColor: "rgba(75, 192, 192, 1)",
+                data: [],
+                fill: false
+            },
+            {
+                label: "VI",
+                function: function (pi, vi, ti, pf, vf, tf) { return (((pf * vf) / tf) * ti) / pi },
+                borderColor: "rgba(153, 102, 255, 1)",
+                data: [],
+                fill: false
+            },
+            {
+                label: "TI",
+                function: function (pi, vi, ti, pf, vf, tf) { return (pi * vi) / ((pf * vf) / tf) },
+                borderColor: "rgba(90, 160, 141, 1)",
+                data: [],
+                fill: false
+            },
+            {
+                label: "PF",
+                function: function (pi, vi, ti, pf, vf, tf) { return (((pi * vi) / ti) * tf) / vf },
+                borderColor: "rgba(200, 112, 116, 1)",
+                data: [],
+                fill: false
+            },
+            {
+                label: "VF",
+                function: function (pi, vi, ti, pf, vf, tf) { return (((pi * vi) / ti) * tf) / pf },
+                borderColor: "rgba(228, 142, 88, 1)",
+                data: [],
+                fill: false
+            },
+            {
+                label: "TF",
+                function: function (pi, vi, ti, pf, vf, tf) { return (pf * vf) / ((pi * vi) / ti) },
+                borderColor: "rgba(255, 206, 86, 1)",
+                data: [],
+                fill: false
+            }]
+        };
+
+
+
+        var barChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Resultado'
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: ''
+                        }
+                    }]
+                }
+            }
+        });
+
+        function updateChart(whatPlot, pi, vi, ti, pf, vf, tf) {
+            barChart.config.data = data;
+            whatPlot = whatPlot.toUpperCase();
+            barChart.config.options.scales.xAxes = [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: whatPlot
+                        }
+                    }];
+            //var data = barChart.config.data;
+            for (var i = 0; i < barChart.config.data.datasets.length; i++) {
+                for (var j = 0; j < barChart.config.data.labels.length; j++) {
+                    if(barChart.config.data.datasets[i].label !== whatPlot){
+                        if(whatPlot === "PI")
+                            pi = x;
+                        else if(whatPlot === "VI")
+                            vi = x;
+                        else if(whatPlot === "TI")
+                            ti = x;
+                        else if(whatPlot === "PF")
+                            pf = x;
+                        else if(whatPlot === "VF")
+                            vf = x;
+                        else if(whatPlot === "TF")
+                            tf = x;
+                        console.log(pi + "---" + vi + "---" + ti + "---" + pf + "---" + vf + "---" + tf);
+                        var fct = data.datasets[i].function,
+                            x = data.labels[j],
+                            y = fct(pi, vi, ti, pf, vf, tf);
+                        data.datasets[i].data.push(y);
+                    }
+                    else{
+                        
+                    }
+                }
+            }
+
+            barChart.update();
+        }
+        */
+        function pvt(toCalculate, pi, vi, ti, pf, vf, tf) {
+            result = 0;
+            if (toCalculate == 'pi') //calculate pi
+                result = (((pf * vf) / tf) * ti) / vi
+            else if (toCalculate == 'ti') //calculate ti
+                result = (pi * vi) / ((pf * vf) / tf)
+            else if (toCalculate == 'vi') //calculate vi
+                result = (((pf * vf) / tf) * ti) / pi
+            else if (toCalculate == 'pf') //calculate pf
+                result = (((pi * vi) / ti) * tf) / vf
+            else if (toCalculate == 'tf') //calculate tf
+                result = (pf * vf) / ((pi * vi) / ti)
+            else if (toCalculate == 'vf') //calculate vf
+                result = (((pi * vi) / ti) * tf) / pf
+            return result.toFixed(2);
+        }
+
+        function verify(value, param) {
+            if (value === undefined || value === "") {
+                alert("Insira o valor de " + param);
+                return false;
+            }
+            else if (isNaN(value)) {
+                alert(param + " precisa ser um número real");
+                return false;
+            }
+            return true;
+        }
+
+
+        function execute() {
+            let pi = 0;
+            let ti = 0;
+            let vi = 0;
+            let pf = 0;
+            let tf = 0;
+            let vf = 0;
+            let result = null;
+            if ($("#pi").val()) {
+                vi = $("#camp1").val().replace(",", ".");
+                ti = $("#camp2").val().replace(",", ".");
+                pf = $("#camp3").val().replace(",", ".");
+                vf = $("#camp4").val().replace(",", ".");
+                tf = $("#camp5").val().replace(",", ".");
+                if (verify(vi, "VI") && verify(ti, "TI") && verify(pf, "PF") && verify(vf, "VF") && verify(tf, "TF")) {
+                    if (tf == 0 || vi == 0) {
+                        alert("[ERRO]: divisão por zero. TF e VI não podem ser zero!");
+                    } else {
+                        result = pvt('pi', pi, vi, ti, pf, vf, tf);
+                        //updateChart('pi', pi, vi, ti, pf, vf, tf);
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            if ($("#vi").val()) {
+                pi = $("#camp1").val().replace(",", ".");
+                ti = $("#camp2").val().replace(",", ".");
+                pf = $("#camp3").val().replace(",", ".");
+                vf = $("#camp4").val().replace(",", ".");
+                tf = $("#camp5").val().replace(",", ".");
+                if (verify(pi, "PI") && verify(ti, "TI") && verify(pf, "PF") && verify(vf, "VF") && verify(tf, "TF")) {
+                    if (tf == 0 || pi == 0) {
+                        alert("[ERRO]: divisão por zero. TF e PI não podem ser zero!")
+                    } else {
+                        result = pvt('vi', pi, vi, ti, pf, vf, tf);
+                        //updateChart('vi', pi, vi, ti, pf, vf, tf);
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            if ($("#ti").val()) {
+                pi = $("#camp1").val().replace(",", ".");
+                vi = $("#camp2").val().replace(",", ".");
+                pf = $("#camp3").val().replace(",", ".");
+                vf = $("#camp4").val().replace(",", ".");
+                tf = $("#camp5").val().replace(",", ".");
+                if (verify(pi, "PI") && verify(vi, "VI") && verify(pf, "PF") && verify(vf, "VF") && verify(tf, "TF")) {
+                    if (tf == 0 || vi == 0 || pf == 0) {
+                        alert("[ERRO]: divisão por zero. TF, PF e VI não podem ser zero!")
+                    } else {
+                        result = pvt('ti', pi, vi, ti, pf, vf, tf);
+                        //updateChart('ti', pi, vi, ti, pf, vf, tf);
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            if ($("#pf").val()) {
+                pi = $("#camp1").val().replace(",", ".");
+                vi = $("#camp2").val().replace(",", ".");
+                ti = $("#camp3").val().replace(",", ".");
+                vf = $("#camp4").val().replace(",", ".");
+                tf = $("#camp5").val().replace(",", ".");
+                if (verify(pi, "PI") && verify(vi, "VI") && verify(ti, "TI") && verify(vf, "VF") && verify(tf, "TF")) {
+                    if (vf == 0 || ti == 0) {
+                        alert("[ERRO]: divisão por zero. VF e TI não podem ser zero!")
+                    } else {
+                        result = pvt('pf', pi, vi, ti, pf, vf, tf);
+                        //updateChart('pf', pi, vi, ti, pf, vf, tf);
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            if ($("#vf").val()) {
+                pi = $("#camp1").val().replace(",", ".");
+                vi = $("#camp2").val().replace(",", ".");
+                ti = $("#camp3").val().replace(",", ".");
+                pf = $("#camp4").val().replace(",", ".");
+                tf = $("#camp5").val().replace(",", ".");
+                if (verify(pi, "PI") && verify(vi, "VI") && verify(ti, "TI") && verify(pf, "PF") && verify(tf, "TF")) {
+                    if (pf == 0 || ti == 0) {
+                        alert("[ERRO]: divisão por zero. TI e PF não podem ser zero!")
+                    } else {
+                        result = pvt('vf', pi, vi, ti, pf, vf, tf);
+                        //updateChart('vf', pi, vi, ti, pf, vf, tf);
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            if ($("#tf").val()) {
+                pi = $("#camp1").val().replace(",", ".");
+                vi = $("#camp2").val().replace(",", ".");
+                ti = $("#camp3").val().replace(",", ".");
+                pf = $("#camp4").val().replace(",", ".");
+                vf = $("#camp5").val().replace(",", ".");
+                if (verify(pi, "PI") && verify(vi, "VI") && verify(ti, "TI") && verify(pf, "PF") && verify(vf, "VF")) {
+                    if (ti == 0 || vi == 0 || pi == 0) {
+                        alert("[ERRO]: divisão por zero. TI, PI e VI não podem ser zero!")
+                    } else {
+                        result = pvt('tf', pi, vi, ti, pf, vf, tf)
+                        //updateChart('tf', pi, vi, ti, pf, vf, tf);
+                    }
+                } else {
+                    return;
+                }
+            }
+
+            if (result != null) {
+                $("#result").text(result);
+                $("#resultDiv").removeClass("hidden");
+            }
+        }
+
+        function clearFields() {
+            $("#camp1").val("");
+            $("#camp2").val("");
+            $("#camp3").val("");
+            $("#camp4").val("");
+            $("#camp5").val("");
+            $("#resultDiv").addClass("hidden");
+        }
+
+        function select(id) {
+            $("#resultDiv").addClass("hidden");
+            change(id);
+            changePlace(id);
+        }
+
+        function changePlace(id) {
+            if (id == "#pi") {
+                $("#camp1").attr("placeholder", "Insira VI").val("").focus().blur();
+                $("#camp2").attr("placeholder", "Insira TI").val("").focus().blur();
+                $("#camp3").attr("placeholder", "Insira PF").val("").focus().blur();
+                $("#camp4").attr("placeholder", "Insira VF").val("").focus().blur();
+                $("#camp5").attr("placeholder", "Insira TF").val("").focus().blur();
+            }
+            else if (id == "#vi") {
+                $("#camp1").attr("placeholder", "Insira PI").val("").focus().blur();
+                $("#camp2").attr("placeholder", "Insira TI").val("").focus().blur();
+                $("#camp3").attr("placeholder", "Insira PF").val("").focus().blur();
+                $("#camp4").attr("placeholder", "Insira VF").val("").focus().blur();
+                $("#camp5").attr("placeholder", "Insira TF").val("").focus().blur();
+            }
+            else if (id == "#ti") {
+                $("#camp1").attr("placeholder", "Insira PI").val("").focus().blur();
+                $("#camp2").attr("placeholder", "Insira VI").val("").focus().blur();
+                $("#camp3").attr("placeholder", "Insira PF").val("").focus().blur();
+                $("#camp4").attr("placeholder", "Insira VF").val("").focus().blur();
+                $("#camp5").attr("placeholder", "Insira TF").val("").focus().blur();
+            }
+            else if (id == "#pf") {
+                $("#camp1").attr("placeholder", "Insira PI").val("").focus().blur();
+                $("#camp2").attr("placeholder", "Insira VI").val("").focus().blur();
+                $("#camp3").attr("placeholder", "Insira TI").val("").focus().blur();
+                $("#camp4").attr("placeholder", "Insira VF").val("").focus().blur();
+                $("#camp5").attr("placeholder", "Insira TF").val("").focus().blur();
+            }
+            else if (id == "#vf") {
+                $("#camp1").attr("placeholder", "Insira PI").val("").focus().blur();
+                $("#camp2").attr("placeholder", "Insira VI").val("").focus().blur();
+                $("#camp3").attr("placeholder", "Insira TI").val("").focus().blur();
+                $("#camp4").attr("placeholder", "Insira PF").val("").focus().blur();
+                $("#camp5").attr("placeholder", "Insira TF").val("").focus().blur();
+            }
+            else if (id == "#tf") {
+                $("#camp1").attr("placeholder", "Insira PI").val("").focus().blur();
+                $("#camp2").attr("placeholder", "Insira VI").val("").focus().blur();
+                $("#camp3").attr("placeholder", "Insira TI").val("").focus().blur();
+                $("#camp4").attr("placeholder", "Insira PF").val("").focus().blur();
+                $("#camp5").attr("placeholder", "Insira VF").val("").focus().blur();
+            }
+        }
+
+        function init() {
+            $("#copy").text("© Copyright " + new Date().getFullYear());
+            clearFields();
+            change("#pi");
+        }
+
+        function change(id) {
+            $(id).removeClass('btn-outline-light');
+            $(id).addClass('btn-light');
+            $(id).val(true);
+
+            buttons.forEach(b => {
+                if (b != id) {
+                    $(b).removeClass('btn-light');
+                    $(b).addClass('btn-outline-light');
+                    $(b).val(false);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            init();
+        });
+
+    </script>
+
+</body>
+
+</html>
